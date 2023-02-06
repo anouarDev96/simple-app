@@ -1,18 +1,16 @@
-name: ci static app
+name: Deploy Website
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Deploying to surge
 
-steps:
-  - uses: actions/checkout@v3
-  - uses: actions/setup-node@v3
-    with:
-      node-version: 16
-  - run: npm install -g surge
-  - run: surge ./ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install -g surge
+      - run: surge ./ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
